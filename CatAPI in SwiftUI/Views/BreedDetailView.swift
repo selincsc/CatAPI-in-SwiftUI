@@ -10,6 +10,9 @@ import SwiftUI
 struct BreedDetailView: View {
     let breed: Breed
     let imageSize: CGFloat = 300
+    let width = UIScreen.main.bounds.width
+    let height = UIScreen.main.bounds.height
+
     
     var body: some View {
         ScrollView {
@@ -19,7 +22,7 @@ struct BreedDetailView: View {
                         if let image = phase.image {
                             image.resizable()
                                 .scaledToFill()
-                                .frame(height: imageSize)
+                                .frame(width: width*0.9 ,height: width*0.9)
                                 .clipped()
                             
                         } else if phase.error != nil {
@@ -40,10 +43,14 @@ struct BreedDetailView: View {
                         .font(.headline)
                     Text(breed.temperament)
                         .font(.footnote)
+                        
                     Text(breed.breedExplaination)
+                        .multilineTextAlignment(.leading)
+                        .padding(.top,8)
                     if breed.isHairless{
                         Text("hairless")
                     }
+                    Divider()
                     HStack{
                         Text("Energy Level")
                         Spacer()
@@ -58,6 +65,8 @@ struct BreedDetailView: View {
             }.padding()
                 .navigationBarTitleDisplayMode(.inline)
         }
+        .frame(width: width*0.96)
+
        
     }
 
